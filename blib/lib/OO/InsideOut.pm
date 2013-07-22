@@ -11,7 +11,7 @@ use Carp qw(croak);
 use Class::ISA ();
 use Scalar::Util 1.09 qw(weaken refaddr);
 
-our $VERSION   = '0.01';
+our $VERSION   = '0.02';
 our @EXPORT    = qw(); 
 our @EXPORT_OK = qw(Dumper id register);
 
