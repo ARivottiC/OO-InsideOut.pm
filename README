@@ -52,8 +52,8 @@ perldoc command.
 
 You can also look for information at:
 
-    RT, CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=OO-InsideOut
+    GitHub (report bugs here)
+        https://github.com/ARivottiC/OO-InsideOut
 
     AnnoCPAN, Annotated CPAN documentation
         http://annocpan.org/dist/OO-InsideOut

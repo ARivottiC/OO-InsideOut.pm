@@ -163,7 +163,8 @@ C_FILES  =
 O_FILES  = 
 H_FILES  = 
 MAN1PODS = 
-MAN3PODS = lib/OO/InsideOut.pm
+MAN3PODS = README.pod \
+	lib/OO/InsideOut.pm
 
 # Where is the Config information that we are using/depend on
 CONFIGDEP = $(PERL_ARCHLIB)$(DFSEP)Config.pm $(PERL_INC)$(DFSEP)config.h
@@ -185,9 +186,12 @@ PERL_ARCHIVE       =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/OO/InsideOut.pm
+TO_INST_PM = README.pod \
+	lib/OO/InsideOut.pm
 
-PM_TO_BLIB = lib/OO/InsideOut.pm \
+PM_TO_BLIB = README.pod \
+	$(INST_LIB)/OO/README.pod \
+	lib/OO/InsideOut.pm \
 	blib/lib/OO/InsideOut.pm
 
 
@@ -410,8 +414,10 @@ POD2MAN = $(POD2MAN_EXE)
 
 
 manifypods : pure_all  \
+	README.pod \
 	lib/OO/InsideOut.pm
 	$(NOECHO) $(POD2MAN) --section=$(MAN3EXT) --perm_rw=$(PERM_RW) \
+	  README.pod $(INST_MAN3DIR)/OO::README.$(MAN3EXT) \
 	  lib/OO/InsideOut.pm $(INST_MAN3DIR)/OO::InsideOut.$(MAN3EXT) 
 
 
@@ -784,6 +790,7 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
+	  README.pod $(INST_LIB)/OO/README.pod \
 	  lib/OO/InsideOut.pm blib/lib/OO/InsideOut.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 

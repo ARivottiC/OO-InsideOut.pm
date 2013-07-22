@@ -416,12 +416,8 @@ André "Rivotti" Casimiro, C<< <rivotti at cpan.org> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to 
-C<bug-oo-insideout at rt.cpan.org>, or through
-the web interface at 
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=OO-InsideOut>.  
-I will be notified, and then you'll automatically be notified of progress on 
-your bug as I make changes.
+Please report any bugs or feature requests through the issue tracker
+at L<https://github.com/ARivottiC/OO-InsideOut/issues>.
 
 =head1 SUPPORT
 
@@ -434,7 +430,7 @@ You can also look for information at:
 
 =over 4
 
-=item * GitHub (report bugs here)
+=item * GitHub 
 
 L<https://github.com/ARivottiC/OO-InsideOut>
 
