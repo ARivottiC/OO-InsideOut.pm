@@ -1,0 +1,25 @@
+---
+abstract: 'Minimal support for Inside-Out Classes'
+author:
+  - 'André Rivotti Casimiro <rivotti@cpan.org>'
+build_requires:
+  ExtUtils::MakeMaker: 0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+distribution_type: module
+dynamic_config: 0
+generated_by: 'ExtUtils::MakeMaker version 6.57_05'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: OO-InsideOut
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  Class::Isa: 0
+  Scalar::Util: 1.09
+  Test::More: 0
+version: 0.01
