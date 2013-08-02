@@ -8,7 +8,7 @@ OO::InsideOut - Minimal support for Inside-Out Classes
 
 =head1 VERSION
 
-0.02
+0.03
 
 =head1 SYNOPSIS
 
@@ -25,7 +25,7 @@ OO::InsideOut - Minimal support for Inside-Out Classes
     }
 
     sub name { 
-        my $id = id shift;
+        my $id = id( shift );
 
         scalar @_
             and $Name{ $id } = shift;
@@ -34,7 +34,7 @@ OO::InsideOut - Minimal support for Inside-Out Classes
     }
 
     sub surname { 
-        my $id = id shift;
+        my $id = id( shift );
 
         scalar @_
             and $Surname{ $id } = shift;
@@ -143,9 +143,9 @@ Consider:
         my $self = shift;
 
         scalar @_
-            && $Name{ id $self } = shift;
+            && $Name{ id( $self ) } = shift;
 
-        return $Name{ id $self );
+        return $Name{ id( $self ) );
     }
 
 
@@ -154,7 +154,7 @@ overload. If you are going to use B<id> more than once, in the same scope,
 consider saving it in an variable earlier: 
 
     sub name { 
-        my $id = id shift;
+        my $id = id( shift );
 
         scalar @_
             && $Name{ $id } = shift;
@@ -252,4 +252,3 @@ by the Free Software Foundation; or the Artistic License.
 
 See http://dev.perl.org/licenses/ for more information.
 
-=cut

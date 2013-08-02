@@ -11,7 +11,7 @@ use Carp qw(croak);
 use Class::ISA ();
 use Scalar::Util 1.09 qw(weaken refaddr);
 
-our $VERSION   = '0.02';
+our $VERSION   = '0.03';
 our @EXPORT    = qw(); 
 our @EXPORT_OK = qw(Dumper id register);
 
@@ -35,7 +35,7 @@ my $classes = sub {
 
 my $register_object = sub {
     my $self = shift;
-    my $id   = id $self;
+    my $id   = id( $self );
 
     for my $class ( $self->$classes ) {
         my $obj = $Object{ $class };
@@ -53,7 +53,7 @@ my $register_object = sub {
 
 my $unregister_object = sub {
     my $self = shift;
-    my $id   = id $self;
+    my $id   = id( $self );
 
     for my $class ( $self->$classes ) {
         # Even if there's no new, there can be stored values
@@ -158,7 +158,7 @@ my $register_hashes = sub {
 
 sub Dumper {
     my $object = shift;
-    my $id     = id $object;
+    my $id     = id( $object );
    
     my %dump;
     for my $class ( $object->$classes ) {
@@ -223,7 +223,7 @@ OO::InsideOut - Minimal support for Inside-Out Classes
 
 =head1 VERSION
 
-0.01
+0.03
 
 =head1 SYNOPSIS
 
@@ -240,7 +240,7 @@ OO::InsideOut - Minimal support for Inside-Out Classes
     }
 
     sub name { 
-        my $id = id shift;
+        my $id = id( shift );
 
         scalar @_
             and $Name{ $id } = shift;
@@ -249,7 +249,7 @@ OO::InsideOut - Minimal support for Inside-Out Classes
     }
 
     sub surname { 
-        my $id = id shift;
+        my $id = id( shift );
 
         scalar @_
             and $Surname{ $id } = shift;
@@ -358,9 +358,9 @@ Consider:
         my $self = shift;
 
         scalar @_
-            && $Name{ id $self } = shift;
+            && $Name{ id( $self ) } = shift;
 
-        return $Name{ id $self );
+        return $Name{ id( $self ) );
     }
 
 
@@ -369,7 +369,7 @@ overload. If you are going to use B<id> more than once, in the same scope,
 consider saving it in an variable earlier: 
 
     sub name { 
-        my $id = id shift;
+        my $id = id( shift );
 
         scalar @_
             && $Name{ $id } = shift;
