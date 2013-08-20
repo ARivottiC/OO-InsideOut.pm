@@ -19,7 +19,7 @@ no_index:
     - t
     - inc
 requires:
-  Class::Isa: 0
+  Class::ISA: 0
   Scalar::Util: 1.09
   Test::More: 0
-version: 0.03
+version: 0.04

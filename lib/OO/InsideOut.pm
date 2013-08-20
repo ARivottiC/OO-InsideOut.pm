@@ -11,7 +11,7 @@ use Carp qw(croak);
 use Class::ISA ();
 use Scalar::Util 1.09 qw(weaken refaddr);
 
-our $VERSION   = '0.03';
+our $VERSION   = '0.04';
 our @EXPORT    = qw(); 
 our @EXPORT_OK = qw(Dumper id register);
 
@@ -223,7 +223,7 @@ OO::InsideOut - Minimal support for Inside-Out Classes
 
 =head1 VERSION
 
-0.03
+0.04
 
 =head1 SYNOPSIS
 
@@ -409,6 +409,51 @@ registered in the CLASS.
 If, for any reason, you need to copy/grep this HASH ref, make sure to 
 L<weaken|Scalar::Util/weaken> every entry again. See 
 L<Scalar::Util::weaken|Scalar::Util/weaken> for more detail on this subject.
+
+=head1 There's more than one way to do it (TMTOWTDI)
+
+Of course, there are other ways to use this module. Here's how I do it:
+
+    package My::Name;
+
+    # don't import nothing, I like my namespace clean
+    use OO::InsideOut ();
+
+    OO::InsideOut::register \my( %Id, %Name, %Surname );
+
+    # save a reference for id function
+    my $id = \&OO::InsideOut::id;
+
+    sub new {
+        my $class = shift;
+
+        my $self = bless \(my $o), ref $class || $class;
+
+        $Id{ $self->$id } = rand;
+
+        return $self;
+    }
+
+    sub name { 
+        my $id = shift->$id;
+
+        scalar @_
+            and $Name{ $id } = shift;
+
+        return $Name{ $id };
+    }
+
+    sub surname { 
+        my $id = shift->$id;
+
+        scalar @_
+            and $Surname{ $id } = shift;
+
+        return $Surname{ $id };
+    }
+
+    # look, I can have an id method, no colision here
+    sub id { return $Id{ shift->$id } }
 
 =head1 AUTHOR
 

@@ -14,7 +14,7 @@ WriteMakefile(
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More'   => 0,
-        'Class::Isa'   => 0,
+        'Class::ISA'   => 0,
         'Scalar::Util' => "1.09",
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },

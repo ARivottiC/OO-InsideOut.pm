@@ -17,7 +17,7 @@
 #     LICENSE => q[perl]
 #     NAME => q[OO::InsideOut]
 #     PL_FILES => {  }
-#     PREREQ_PM => { Test::More=>q[0], Scalar::Util=>q[1.09], Class::Isa=>q[0] }
+#     PREREQ_PM => { Test::More=>q[0], Scalar::Util=>q[1.09], Class::ISA=>q[0] }
 #     VERSION_FROM => q[lib/OO/InsideOut.pm]
 #     clean => { FILES=>q[OO-InsideOut-*] }
 #     dist => { COMPRESS=>q[gzip -9f], SUFFIX=>q[gz] }
@@ -59,11 +59,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = OO::InsideOut
 NAME_SYM = OO_InsideOut
-VERSION = 0.03
+VERSION = 0.04
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_03
+VERSION_SYM = 0_04
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.03
+XS_VERSION = 0.04
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -163,8 +163,7 @@ C_FILES  =
 O_FILES  = 
 H_FILES  = 
 MAN1PODS = 
-MAN3PODS = README.pod \
-	lib/OO/InsideOut.pm
+MAN3PODS = lib/OO/InsideOut.pm
 
 # Where is the Config information that we are using/depend on
 CONFIGDEP = $(PERL_ARCHLIB)$(DFSEP)Config.pm $(PERL_INC)$(DFSEP)config.h
@@ -186,12 +185,9 @@ PERL_ARCHIVE       =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = README.pod \
-	lib/OO/InsideOut.pm
+TO_INST_PM = lib/OO/InsideOut.pm
 
-PM_TO_BLIB = README.pod \
-	$(INST_LIB)/OO/README.pod \
-	lib/OO/InsideOut.pm \
+PM_TO_BLIB = lib/OO/InsideOut.pm \
 	blib/lib/OO/InsideOut.pm
 
 
@@ -261,7 +257,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = OO-InsideOut
-DISTVNAME = OO-InsideOut-0.03
+DISTVNAME = OO-InsideOut-0.04
 
 
 # --- MakeMaker macro section:
@@ -414,10 +410,8 @@ POD2MAN = $(POD2MAN_EXE)
 
 
 manifypods : pure_all  \
-	README.pod \
 	lib/OO/InsideOut.pm
 	$(NOECHO) $(POD2MAN) --section=$(MAN3EXT) --perm_rw=$(PERM_RW) \
-	  README.pod $(INST_MAN3DIR)/OO::README.$(MAN3EXT) \
 	  lib/OO/InsideOut.pm $(INST_MAN3DIR)/OO::InsideOut.$(MAN3EXT) 
 
 
@@ -484,7 +478,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '--- #YAML:1.0' > META_new.yml
 	$(NOECHO) $(ECHO) 'name:               OO-InsideOut' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version:            0.03' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version:            0.04' >> META_new.yml
 	$(NOECHO) $(ECHO) 'abstract:           Minimal support for Inside-Out Classes' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - André Rivotti Casimiro <rivotti@cpan.org>' >> META_new.yml
@@ -495,7 +489,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) 'build_requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '    ExtUtils::MakeMaker:  0' >> META_new.yml
 	$(NOECHO) $(ECHO) 'requires:' >> META_new.yml
-	$(NOECHO) $(ECHO) '    Class::Isa:    0' >> META_new.yml
+	$(NOECHO) $(ECHO) '    Class::ISA:    0' >> META_new.yml
 	$(NOECHO) $(ECHO) '    Scalar::Util:  1.09' >> META_new.yml
 	$(NOECHO) $(ECHO) '    Test::More:    0' >> META_new.yml
 	$(NOECHO) $(ECHO) 'no_index:' >> META_new.yml
@@ -773,11 +767,11 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0.03">' > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0.04">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT>Minimal support for Inside-Out Classes</ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR>André Rivotti Casimiro &lt;rivotti@cpan.org&gt;</AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Class::Isa" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Class::ISA" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Scalar::Util" VERSION="1.09" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Test::More" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.14" />' >> $(DISTNAME).ppd
@@ -790,7 +784,6 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
-	  README.pod $(INST_LIB)/OO/README.pod \
 	  lib/OO/InsideOut.pm blib/lib/OO/InsideOut.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
