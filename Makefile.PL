@@ -17,6 +17,11 @@ WriteMakefile(
         'Class::ISA'   => 0,
         'Scalar::Util' => "1.09",
     },
+    META_MERGE          => {
+        resources => {
+            repository => 'https://github.com/ARivottiC/OO-InsideOut',
+        },
+    },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'OO-InsideOut-*' },
 );
